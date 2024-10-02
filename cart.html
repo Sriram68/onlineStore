@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart</title>
+    <link rel="stylesheet" href="cart.css">
+</head>
+<body>
+    <!-- Navbar with "My Cart" heading and credit score display -->
+    <nav>
+        <!-- Add this inside the body tag -->
+<button id="darkModeToggle" class="dark-mode-toggle">🌙</button> <!-- Moon icon by default -->
+
+        <h1 class="center">My Cart</h1>
+        <div class="right">
+            <span id="creditScore">Credit Score: </span>
+        </div>
+    </nav>
+
+    <!-- Cart Container -->
+    <div id="cartContainer">
+        <!-- Cart items will be dynamically added here -->
+    </div>
+    <div id="successPopup" class="popup">
+        Order placed successfully!
+        <button id="closePopupBtn" class="popup-btn">OK</button>
+    </div>
+    
+    <!-- Grand Total -->
+    <div class="grand-total">
+        <p>Grand Total: <span id="grandTotal">$0</span></p>
+    </div>
+
+    <!-- Action buttons for purchase -->
+    <div class="action-buttons">
+        <button id="buyCashBtn">Buy with Cash</button>
+        <button id="buyCreditBtn" disabled>Buy with Credit Score</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

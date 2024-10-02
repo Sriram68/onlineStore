@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Store</title>
+    <link rel="stylesheet" href="customer.css">
+</head>
+<body>
+    <header>
+        <button id="darkModeToggle"></button> <!-- Dark mode toggle button -->
+        <input type="text" id="searchBar" placeholder="Search for items...">
+        <select id="categoryDropdown">
+            <!-- Categories will be loaded dynamically -->
+        </select>
+        <button id="cartBtn">Cart</button>
+        <button id="orderHistoryBtn">Order History</button>
+    </header>
+
+    <div id="inventoryContainer">
+        <!-- Inventory items will be displayed here -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="customer.js"></script>
+</body>
+</html>

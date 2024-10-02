@@ -1,0 +1,188 @@
+/* General body styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #E2DCDE; /* Light mode background */
+    color: #2D2D34; /* Default text color */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Ensure full viewport height */
+    overflow-x: hidden; /* Disable horizontal scrolling */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Header */
+h1 {
+    font-size: 2.5em;
+    margin: 20px 0;
+    color: #B97375;
+    text-align: center;
+}
+
+/* Credit Score */
+#customerCreditScore {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #2D2D34;
+}
+
+/* Orders Container */
+#ordersContainer {
+    width: 80%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column; /* Stack order cards vertically */
+    align-items: center; /* Center content */
+}
+
+/* Order card styles */
+.order-card {
+    background-color: #CEB1BE;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 0;
+    width: 100%; /* Full width of the container */
+    max-width: 600px; /* Maximum width for better readability */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+}
+
+/* Hover effects for order cards */
+.order-card:hover {
+    transform: scale(1.03); /* Slight scaling effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Order header details */
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #2D2D34;
+    margin-bottom: 10px; /* Space below header */
+}
+
+.order-header span {
+    font-size: 1.2em;
+}
+
+/* Item card styles */
+.item-card {
+    background-color: #B97375;
+    color: #F1E4E8;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 5px; /* Space between item cards */
+    width: 90%; /* Two cards per row with margin adjustment */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items */
+    justify-content: center; /* Center items vertically */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Item card image */
+.item-card img {
+    max-width: 100px; /* Image size */
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* Pagination container */
+#paginationContainer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center; /* Center pagination controls */
+}
+
+#pagination button {
+    background-color: #B97375;
+    color: #F1E4E8;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 0 5px; /* Space between buttons */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#pagination button:hover {
+    background-color: #2D2D34;
+    transform: translateY(-2px); /* Slight pop-up effect */
+}
+
+#pagination button:disabled {
+    background-color: #CEB1BE;
+    cursor: not-allowed;
+}
+
+/* Dark Mode Toggle */
+#darkModeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+    color: #2D2D34;
+    transition: color 0.3s ease;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #2D2D34; /* Dark mode background */
+    color: #F1E4E8; /* Light text */
+}
+
+body.dark-mode .order-card {
+    background-color: #B97375; /* Dark mode order card */
+}
+
+body.dark-mode .item-card {
+    background-color: #2D2D34; /* Dark mode item card */
+    color: #F1E4E8; /* Light text */
+}
+
+body.dark-mode #pagination button {
+    background-color: #CEB1BE; /* Dark mode pagination button */
+    color: #2D2D34; /* Dark mode button text */
+}
+
+body.dark-mode #pagination button:hover {
+    background-color: #E2DCDE; /* Dark mode button hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #ordersContainer {
+        width: 95%; /* Adjust width for smaller screens */
+    }
+
+    .order-card {
+        padding: 15px; /* Adjust padding */
+    }
+
+    .item-card {
+        width: calc(100% - 10px); /* Full width for mobile */
+    }
+}
+
+/* Smooth scrolling and pop-in effect */
+html {
+    scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+body {
+    animation: fadeIn 1.5s ease-in-out; /* Fade-in effect */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

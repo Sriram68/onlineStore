@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+    <!-- Search Inventory by Name -->
+    <!-- <h3>Search Inventory by Name</h3> -->
+    <div>
+        <input type="text" id="searchBar" placeholder="Search items by name or description" />
+    </div>
+    <div id="itemsContainer"></div>
+    <!-- Inventory Management Section -->
+    <div id="inventoryManagement">
+        <!-- <h2>Inventory Management</h2> -->
+        
+        <!-- Add Item Form -->
+        <button id="showAddItemFormBtn">Add a New Item</button> <!-- Button to show the form -->
+
+<form id="addItemForm" style="display: none;"> <!-- Initially hidden -->
+    <h3>Add an item into the inventory</h3>
+
+    <label for="itemName">Item Name:</label>
+    <input type="text" id="itemName" required>
+
+    <label for="itemPrice">Item Price:</label>
+    <input type="number" id="itemPrice" required>
+
+    <label for="itemQuantity">Item Quantity:</label>
+    <input type="number" id="itemQuantity" required>
+
+    <label for="itemDesc">Item Description:</label>
+    <textarea id="itemDesc" required></textarea>
+
+    <label for="itemCategory">Category Name:</label>
+    <input type="text" id="itemCategory" required>
+
+    <label for="itemImage">Item Image (.png or .jpg):</label>
+    <input type="file" id="itemImage" accept=".png, .jpg" required>
+
+    <button id="addItemButton" type="submit">Add Item</button> <!-- Note the ID -->
+</form>
+
+        
+
+        <!-- New Update Item Button -->
+        <button id="updateItemBtn">Update Inventory Items</button>
+
+        <!-- Input fields for updating the inventory -->
+        <div id="updateItemForm" style="display:none;">
+            <h3> Update an inventory item</h3>
+            <input type="text" id="itemName2" placeholder="Enter Item Name" />
+            <input type="number" id="itemPrice2" placeholder="Enter Item Price" />
+            <input type="number" id="itemQuantity2" placeholder="Enter Item Quantity" />
+            <input type="text" id="itemDesc2" placeholder="Enter description" />
+            <button id="submitUpdateBtn">Update Item</button>
+        </div>
+        
+        <!-- Button to Check and Update Availability -->
+        <button id="checkAvailabilityBtn">Check Item Availability</button> <!-- Button to show the form -->
+
+        <form id="checkAvailabilityForm" style="display: none;"> <!-- Initially hidden -->
+            <h3>Check status</h3>
+            <label for="itemName3">Enter Item Name:</label>
+            <input type="text" id="itemName3" required>
+            
+            <button type="submit">Check Availability</button> <!-- Form submit button -->
+        </form>
+
+
+        <!-- Form to show current availability and change it -->
+        <div id="updateAvailabilityForm" style="display:none;">
+            <p>Current Status: <span id="currentAvailability"></span></p>
+            <label for="availabilityStatus">Update Availability:</label>
+            <select id="availabilityStatus">
+                <option value="true">Available</option>
+                <option value="false">Out of Stock</option>
+            </select>
+            <button id="submitAvailabilityBtn">Submit</button>
+        </div>
+
+        <!-- Input field and button to read by category -->
+        <button id="readByCategoryBtn">Read by Category</button>
+        <div id="categoryContainer"></div>
+
+        <!-- Inventory items displayed dynamically -->
+        <div id="categoryInventoryContainer" class="inventory-grid" style="margin-top: 30px;">
+            
+            <!-- Cards for category-based items will be injected here -->
+        </div>
+
+        <div id="categoryPagination" style="display:none;">
+            <button id="prevCategoryBtn" disabled>Previous</button>
+            <span id="categoryPageIndicator">Page 1</span>
+            <button id="nextCategoryBtn">Next</button>
+        </div>
+
+
+        <h3>Existing Inventory</h3>
+        <div id="inventoryContainer" class="inventory-grid">
+            <!-- Inventory items loaded dynamically as cards -->
+        </div>
+        <div id="pagination">
+            <button id="prevBtn" disabled>Previous</button>
+            <span id="pageInfo">Page 1</span>
+            <button id="nextBtn">Next</button>
+        </div>
+    </div>
+
+    <!-- CRUD Operations Section -->
+    <div id="crudOperations">
+        <h2>Customer Credit Score Operations</h2>
+        <button id="fetchCustomersBtn">Fetch Customers</button>
+        <div id="customerList" style="display: none;">
+            <h3>Available Customers</h3>
+            <div id="customers"></div>
+            
+            <!-- Pagination controls -->
+            <div id="customerPagination">
+                <button id="prevCustomerBtn" disabled>Previous</button>
+                <span id="customerPageIndicator">Page 1</span>
+                <button id="nextCustomerBtn">Next</button>
+            </div>
+            
+            <!-- Update and Reset buttons below all records -->
+            
+        </div>
+        <div id="creditActions">
+                <button id="updateCreditBtn">Update Credit Score</button>
+                <button id="resetCreditBtn">Reset Credit Score</button>
+            </div>
+    </div>
+    
+    <div id="formContainer"></div>
+    <div id="reports">
+        <h2>Reports</h2>
+        <button id="customerReport">Customer Report</button>
+        <button id="salesReport">Sales Report</button>
+        <button id="inventoryReport">Inventory Report</button>
+    </div>
+    
+    <!-- Report options will be dynamically added here -->
+    <div id="reportOptions"></div>
+    
+    <!-- Date Pickers -->
+    <div id="dateSelection" style="display: none;">
+        <label for="fromDate">From Date:</label>
+        <input type="date" id="fromDate" name="fromDate">
+        <label for="toDate">To Date:</label>
+        <input type="date" id="toDate" name="toDate">
+        <button id="generateReport">Generate Report</button>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="app.js"></script>
+    <script src="report.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

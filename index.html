@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h2>Welcome to the Online Store!</h2>
+    <!-- Dark Mode Toggle -->
+    <button id="darkModeToggle">🌙</button>
+
+    <!-- Container holding both forms -->
+    <div class="form-container">
+        <!-- Sign-Up Form -->
+        <div class="form-card">
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <label for="signupName">Name:</label>
+                <input type="text" id="signupName" required>
+
+                <label for="signupEmail">Email:</label>
+                <input type="email" id="signupEmail" required>
+
+                <label for="signupPassword">Password:</label>
+                <input type="password" id="signupPassword" required>
+
+                <label for="mobile">Mobile Number:</label>
+                <input type="text" id="mobile" required>
+
+                <button type="submit">Sign Up</button>
+            </form>
+        </div>
+
+        <!-- Sign-In Form -->
+        <div class="form-card">
+            <h2>Sign In</h2>
+            <form id="loginForm">
+                <label for="loginEmail">Email:</label>
+                <input type="email" id="loginEmail" required>
+
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" required>
+
+                <button type="submit">Sign In</button>
+            </form>
+
+            <!-- Forgot Password -->
+            <div>
+                <a href="#" id="resetPassword">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Sign-In Button -->
+    <div style="text-align: center;">
+        <button id="googleSignIn">Sign In with Google</button>
+    </div>
+
+    <!-- Firebase and jQuery -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

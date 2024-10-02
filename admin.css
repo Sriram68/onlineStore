@@ -1,0 +1,219 @@
+/* General body styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #2D2D34; /* Primary background color from the palette */
+    color: #E2DCDE; /* Light text color */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Disable horizontal scrolling */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    font-size: 3em;
+    margin-top: 20px;
+    color: #E2DCDE; /* Light text color for header */
+}
+
+/* Container for content */
+#inventoryManagement, #crudOperations, #reports {
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Buttons */
+button {
+    background-color: #B97375; /* Secondary color from the palette */
+    color: #E2DCDE; /* Light text */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #7D1D3F;
+    transform: translateY(-5px); /* Pop-up effect on hover */
+}
+
+button:disabled {
+    background-color: #CEB1BE; /* Muted color for disabled buttons */
+    cursor: not-allowed;
+}
+
+/* Input fields */
+input[type="text"], input[type="number"], input[type="email"], input[type="password"], input[type="date"], textarea {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #E2DCDE; /* Light background for inputs */
+    border: 2px solid #B97375;
+    border-radius: 5px;
+    color: #2D2D34; /* Dark text for inputs */
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="password"]:focus, textarea:focus {
+    border-color: #2D2D34;
+}
+
+/* Cards for inventory */
+.inventory-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+#itemsContainer{
+    background-color: #2D2D34;
+    color: white; /* Card background with palette color */
+    width: calc(33% - 40px);
+    padding: 20px;
+    border-radius: 10px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+}
+.inventory-card {
+    background-color: #E2DCDE;
+    color: black; /* Card background with palette color */
+    width: calc(33% - 40px);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.inventory-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px #E2DCDE;
+}
+
+/* Dark mode toggle */
+#darkModeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+    color: #E2DCDE; /* Light text for dark mode toggle */
+    transition: color 0.3s ease;
+}
+
+#darkModeToggle:hover {
+    color: #B97375;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #2D2D34;
+    color: #E2DCDE;
+}
+
+body.dark-mode .inventory-card {
+    background-color: #B97375;
+}
+
+body.dark-mode input, body.dark-mode textarea {
+    background-color: #CEB1BE;
+    color: #2D2D34;
+    border-color: #B97375;
+}
+
+body.dark-mode button {
+    background-color: #CEB1BE;
+    color: #2D2D34;
+}
+
+body.dark-mode button:hover {
+    background-color: #E2DCDE;
+    color: #2D2D34;
+}
+
+/* Forms styling */
+form {
+    background-color: #B97375;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Pagination */
+#pagination, #categoryPagination, #customerPagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#pageInfo, #categoryPageIndicator, #customerPageIndicator {
+    margin: 0 10px;
+}
+
+button:disabled {
+    background-color: #CEB1BE;
+    color: #F1E4E8;
+    cursor: not-allowed;
+}
+
+/* Search Bar */
+#searchBar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 200px; /* Smaller width for search bar */
+    padding: 10px;
+    border: 2px solid #B97375;
+    border-radius: 5px;
+    background-color: #F1E4E8;
+    color: #2D2D34;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .inventory-card {
+        width: calc(50% - 20px); /* Adjust the width for smaller screens */
+    }
+
+    #reports button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .inventory-card {
+        width: 100%; /* Full width for mobile screens */
+    }
+
+    input[type="text"], input[type="number"], input[type="email"], input[type="password"], textarea {
+        width: 90%;
+    }
+}
+
+/* Smooth scrolling and pop-in effect */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

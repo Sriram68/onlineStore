@@ -1,0 +1,135 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #B97375; /* Background color */
+    color: #fff; /* Default text color */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    overflow-x: hidden; /* Disable horizontal scrolling */
+}
+h2{
+    text-align: center;
+}
+
+/* Container to hold both forms */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top */
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 40px; /* Increased gap between cards */
+    margin-top: 50px; /* Space from the top */
+}
+
+/* Form card styling */
+.form-card {
+    background-color: #2D2D34; /* Card background color */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Width of each card */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Center items inside the card */
+.form-card input, .form-card textarea {
+    width: 80%; /* Reduce input width */
+    background-color: white; /* Input background color for light mode */
+    margin: 10px auto; /* Centering input fields */
+    color: #333; /* Text color for inputs */
+}
+
+/* Form fields styling */
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #fff; /* Label color */
+}
+
+button {
+    background-color: #BBBDF6;
+    color: #333; /* Button text color */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #625F63;
+    color: white;
+}
+
+/* Google Sign-In button */
+#googleSignIn {
+    background-color: #BBBDF6;
+    color: #333; /* Google button text color */
+    font-size: 16px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Center the Google Sign-In button */
+#googleSignIn {
+    width: 300px; /* Set a fixed width */
+    margin-top: 20px; /* Space above the button */
+}
+
+#googleSignIn:hover {
+    background-color: #625F63;
+    color: white;
+}
+
+/* Dark mode toggle */
+#darkModeToggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+#darkModeToggle:hover {
+    color: #BBBDF6;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #333;
+    color: #FFF;
+}
+
+body.dark-mode .form-card {
+    background-color: #625F63;
+}
+
+body.dark-mode input, body.dark-mode textarea, body.dark-mode button {
+    background-color: #9893DA;
+    color: white;
+}
+
+body.dark-mode button:hover, body.dark-mode #googleSignIn:hover {
+    background-color: #9893DA;
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-container {
+        flex-direction: column; /* Stack on small screens */
+        align-items: center; /* Center items */
+    }
+
+    .form-card {
+        width: 90%; /* Full width for smaller screens */
+    }
+}
