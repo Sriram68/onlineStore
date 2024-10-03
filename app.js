@@ -128,66 +128,103 @@ $("#signupForm").submit(function (e) {
 });
 
 // Google Sign-In
-$('#googleSignIn').click(function () {
-    var provider = new firebase.auth.GoogleAuthProvider();
+// $('#googleSignIn').click(function () {
+//     var provider = new firebase.auth.GoogleAuthProvider();
 
-    auth.signInWithPopup(provider)
-        .then(function (result) {
-            var user = result.user;
+//     auth.signInWithPopup(provider)
+//         .then(function (result) {
+//             var user = result.user;
 
-            // Fetch the current customer_id from customer_counter
-            $.ajax({
-                url: countersAPI + '/customer_counter',
-                type: 'GET',
-                success: function (response) {
-                    if (response.fields && response.fields.customer_id) {
-                        var customerId = parseInt(response.fields.customer_id.integerValue);
+//             // Fetch the current customer_id from customer_counter
+//             $.ajax({
+//                 url: countersAPI + '/customer_counter',
+//                 type: 'GET',
+//                 success: function (response) {
+//                     if (response.fields && response.fields.customer_id) {
+//                         var customerId = parseInt(response.fields.customer_id.integerValue);
 
-                        // Increment customer_id
-                        var newCustomerId = customerId + 1;
+//                         // Increment customer_id
+//                         var newCustomerId = customerId + 1;
 
-                        // Prepare user data to be saved in Firestore
-                        var userData = {
-                            customer_id: newCustomerId,
-                            email: user.email,
-                            name: user.displayName,
-                            mobile_number: null, // Set as null or default for Google Sign-In
-                            credit_score: 0,
-                            role: 'user' // Add role field
-                        };
+//                         // Prepare user data to be saved in Firestore
+//                         var userData = {
+//                             customer_id: newCustomerId,
+//                             email: user.email,
+//                             name: user.displayName,
+//                             mobile_number: null, // Set as null or default for Google Sign-In
+//                             credit_score: 0,
+//                             role: 'user' // Add role field
+//                         };
 
-                        // Save user data to Firestore
-                        return saveUserToFirestore(user.uid, userData);
-                    }
-                }
-            })
-            .then(function () {
-                alert('User signed in with Google and saved successfully!');
+//                         // Save user data to Firestore
+//                         return saveUserToFirestore(user.uid, userData);
+//                     }
+//                 }
+//             })
+//             .then(function () {
+//                 alert('User signed in with Google and saved successfully!');
 
-                // Update the customer_counter with the incremented ID
-                $.ajax({
-                    url: countersAPI + '/customer_counter',
-                    type: 'PATCH',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        fields: {
-                            customer_id: { integerValue: newCustomerId }
-                        }
-                    }),
-                    success: function () {
-                        console.log("Customer counter updated successfully.");
-                    },
-                    error: function (error) {
-                        console.log("Error updating customer counter: ", error);
-                    }
-                });
-            })
-            .catch(function (error) {
-                alert('Google Sign-In Error: ' + error.message);
-            });
+//                 // Update the customer_counter with the incremented ID
+//                 $.ajax({
+//                     url: countersAPI + '/customer_counter',
+//                     type: 'PATCH',
+//                     contentType: 'application/json',
+//                     data: JSON.stringify({
+//                         fields: {
+//                             customer_id: { integerValue: newCustomerId }
+//                         }
+//                     }),
+//                     success: function () {
+//                         console.log("Customer counter updated successfully.");
+//                     },
+//                     error: function (error) {
+//                         console.log("Error updating customer counter: ", error);
+//                     }
+//                 });
+//             })
+//             .catch(function (error) {
+//                 alert('Google Sign-In Error: ' + error.message);
+//             });
+// });
+// });
+
+const googleSignInButton = document.getElementById('googleSignIn');
+googleSignInButton.addEventListener('click', () => {
+  const provider = new firebase.auth.GoogleAuthProvider();;
+ 
+  auth.signInWithPopup(provider)
+    .then((result) => {
+      const user = result.user;
+      const userEmail = user.email;
+ 
+      // Check if user exists in Firestore
+      const docRef = doc(db, 'users', user.uid);
+      setDoc(docRef, {
+        email: user.email,
+        firstName: user.displayName.split(' ')[0],  // Use Google's displayName
+        lastName: user.displayName.split(' ')[1] || '' // Last name might be absent
+      }, { merge: true }) // Merge to avoid overwriting existing data
+      .then(() => {
+        alert("Google sign-in successful!");
+        localStorage.setItem('loggedInUserId', user.uid);
+       
+        // Redirect based on email condition
+        if (userEmail === 'everygame68@gmail.com') {
+          window.location.href = 'admin.html'; // Redirect to homepage if specific email matches
+        } else {
+          window.location.href = 'customer.html'; // Redirect to another page if email doesn't match
+        }
+      })
+      .catch((error) => {
+        console.error("Error adding document: ", error);
+      });
+    })
+    .catch((error) => {
+      console.error('Error during Google Sign-In: ', error);
+    //   showMessage('Google Sign-In failed', 'signInMessage');
+    alert("Google sign-in failed");
+    });
 });
-});
-
 // Sign-in with email and password
 $("#loginForm").submit(function (e) {
     e.preventDefault();
