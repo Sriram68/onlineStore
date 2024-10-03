@@ -188,42 +188,47 @@ $("#signupForm").submit(function (e) {
 // });
 // });
 
-const googleSignInButton = document.getElementById('googleSignIn');
-googleSignInButton.addEventListener('click', () => {
-  const provider = new firebase.auth.GoogleAuthProvider();;
+$('#googleSignIn').click(async function (e) {
+    e.preventDefault();
  
-  auth.signInWithPopup(provider)
-    .then((result) => {
-      const user = result.user;
-      const userEmail = user.email;
+    const provider = new firebase.auth.GoogleAuthProvider();
  
-      // Check if user exists in Firestore
-      const docRef = doc(db, 'users', user.uid);
-      setDoc(docRef, {
-        email: user.email,
-        firstName: user.displayName.split(' ')[0],  // Use Google's displayName
-        lastName: user.displayName.split(' ')[1] || '' // Last name might be absent
-      }, { merge: true }) // Merge to avoid overwriting existing data
-      .then(() => {
-        alert("Google sign-in successful!");
-        localStorage.setItem('loggedInUserId', user.uid);
-       
-        // Redirect based on email condition
-        if (userEmail === 'everygame68@gmail.com') {
-          window.location.href = 'admin.html'; // Redirect to homepage if specific email matches
-        } else {
-          window.location.href = 'customer.html'; // Redirect to another page if email doesn't match
-        }
-      })
-      .catch((error) => {
-        console.error("Error adding document: ", error);
-      });
-    })
-    .catch((error) => {
-      console.error('Error during Google Sign-In: ', error);
-    //   showMessage('Google Sign-In failed', 'signInMessage');
-    alert("Google sign-in failed");
-    });
+    auth.signInWithPopup(provider)
+        .then(function (result) {
+            // Display success message
+            alert('Google Sign-In Successful!');
+ 
+            // Get signed-in user ID
+            const userId = result.user.uid;
+            const userEmail = result.user.email;
+ 
+            // Fetch user details from Firestore
+            db.collection('customer').doc(userId).get().then(function (doc) {
+                if (doc.exists) {
+                    // const userRole = doc.data().role; // Assuming 'role' field exists in Firestore
+                    const userName = doc.data().name;
+ 
+                    // Store userId and userRole in sessionStorage
+                 
+                    sessionStorage.setItem('customerEmail', userEmail); // Store email in sessionStorage
+ 
+                    // Redirect based on user role or email
+                    if (userEmail === 'everygame68@gmail.com') {
+                        alert(`Welcome Admin!`);
+                        window.location.href = 'admin.html'; // Redirect to admin page
+                    }else {
+                        alert(`Welcome ${userName}`);
+                            window.location.href = 'customer.html';
+                    }
+                 }
+            }).catch(function (error) {
+                console.error('Error getting user document:', error);
+            });
+        })
+        .catch(function (error) {
+            console.error('Error during Google Sign-In: ', error);
+            alert('Google Sign-In failed: ' + error.message);
+        });
 });
 // Sign-in with email and password
 $("#loginForm").submit(function (e) {
